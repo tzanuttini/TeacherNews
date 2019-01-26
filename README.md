@@ -8,3 +8,4 @@ This version is done in spanish only and support UTF-8.
 w3.css
 jQuery UI - v1.8.23
 jQuery v@1.8.0
+MariaDB(MySql)
