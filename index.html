@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Login Cuaderno de comunicaciones</title>
+    
+    <script src="js/jquery.min.js"></script>
+    
+    <script src="js/jquery-ui.min.js"></script>
+</head>
+
+<body>
+    <div style="margin:15% auto auto auto;border:1px solid black; background-color: green;padding-bottom: 5px;height:200px;width: 200px;padding-left:20px;">
+        <p>Usuario:</p>
+        <input type="text" name="usuario" id="usuario">
+        <p>Clave: </p>
+        <input type="password" name="clave" id="clave">
+        <br>
+        <br>
+        <button name="ingresar" id="ingresar">Ingresar</button>
+    </div>
+    <script>
+        $("#ingresar").click(function () {
+            var ingresa = true;
+            if (document.getElementById('usuario').value == "") {
+                window.alert("Debe ingresar su nombre de usuario para poder comprar");
+                $("#usuario").focus();
+                ingresa = false;
+            }
+            else {
+                if (document.getElementById('clave').value == "") {
+                    window.alert("Debe ingresar su clave de usuario para poder comprar");
+                    $("#clave").focus();
+                    ingresa = false;
+                }
+            }
+            if (ingresa) {
+                $.ajax({
+                    url: 'login.php',
+                    data: 'usuario=' + document.getElementById('usuario').value + '&clave=' + document.getElementById('clave').value,
+                    type: 'get',
+                    dataType: 'html',
+                    success: function (html) {
+                        if (html == 'alumno') {
+                           location.href="alumnos.php"
+                        }
+                        else if (html == 'profesor') {
+                            location.href="profesores.php";
+                        } else {
+                            ingresa = false;
+                            window.alert("El usuario y la clave no coinciden con un usuario valido.");
+                        }
+                    }
+                })
+            }
+        });
+    </script>
+</body>
+</html>
